@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stochastic Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Stochastic Calculator</h1>
+    <label for="close">Close Price:</label>
+    <input type="number" id="close" step="any" required><br>
+    <div> _____________________________________</div>
+    <label class="low">Low Price:</label>
+    <input type="number" id="low" step="any" required><br>
+    <div> ______________________________________</div>
+    <label for="high">High Price:</label>
+    <input type="number" id="high" step="any" required><br>
+    <div> ______________________________________</div>
+    <button class ="button-30" role = "button" onclick="calculateStochastic()">Calculate</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function calculateStochastic() {
+      const close = parseFloat(document.getElementById('close').value);
+      const low = parseFloat(document.getElementById('low').value);
+      const high = parseFloat(document.getElementById('high').value);
+
+      const kValue = ((close - low) / (high - low)) * 100;
+      let marketCondition = 'Neutral';
+
+      if (kValue > 80) {
+        marketCondition = 'Overbought, sell quickly';
+      } else if (kValue < 20) {
+        marketCondition = 'Oversold, buy as much as you can!';
+      }
+
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = `%K Value: ${kValue.toFixed(2)}, Market Condition: ${marketCondition}`;
+    }
+  </script>
+</body>
+</html>
